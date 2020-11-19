@@ -33,8 +33,11 @@ function onClickGall(event) {
   imgBigRef.src = bigImg;
   console.log(event.target);
 }
-btnCloseRef.addEventListener("click", closeModal);
+btnCloseRef.addEventListener('click', closeModal);
+btnCloseRef.addEventListener('keydown', closeModal);
 function closeModal(event) {
   modalRef.classList.remove("is-open");
-  console.log(event.target);
+  imgBigRef.src = '';
+
 }
+
