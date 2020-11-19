@@ -49,6 +49,5 @@ function closeModal() {
 
 backdropRef.addEventListener('click',(event)=>{
 if (event.target===event.currentTarget){
-  modalRef.classList.remove("is-open");
-  imgBigRef.src = '';
+  closeModal()
 }})
