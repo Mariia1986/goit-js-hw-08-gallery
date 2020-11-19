@@ -4,6 +4,7 @@ const galleryRef = document.querySelector(".gallery");
 const modalRef = document.querySelector(".lightbox");
 const imgBigRef = document.querySelector(".lightbox__image");
 const btnCloseRef = document.querySelector('[data-action="close-lightbox"]');
+const backdropRef = document.querySelector('.lightbox__overlay');
 const galArr = gallery.map(({ preview, original, description }) => {
   return `<li class="gallery__item">
 <a
@@ -35,9 +36,12 @@ function onClickGall(event) {
 }
 btnCloseRef.addEventListener('click', closeModal);
 btnCloseRef.addEventListener('keydown', closeModal);
-function closeModal(event) {
+function closeModal() {
   modalRef.classList.remove("is-open");
   imgBigRef.src = '';
-
 }
 
+backdropRef.addEventListener('click',(event)=>{
+if (event.target===event.currentTarget){
+  modalRef.classList.remove("is-open");
+}})
