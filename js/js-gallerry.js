@@ -33,9 +33,15 @@ function onClickGall(event) {
   modalRef.classList.add("is-open");
   imgBigRef.src = bigImg;
   console.log(event.target);
+  window.addEventListener('keydown', (event)=>{
+    if (event.code==='Escape'){
+      closeModal()
+    }
+  } )
+
 }
 btnCloseRef.addEventListener('click', closeModal);
-btnCloseRef.addEventListener('keydown', closeModal);
+
 function closeModal() {
   modalRef.classList.remove("is-open");
   imgBigRef.src = '';
@@ -44,4 +50,5 @@ function closeModal() {
 backdropRef.addEventListener('click',(event)=>{
 if (event.target===event.currentTarget){
   modalRef.classList.remove("is-open");
+  imgBigRef.src = '';
 }})
