@@ -47,13 +47,10 @@ function changeImg(event) {
   if (event.code ==="ArrowRight"){
     event.target.firstElementChild.dataset.index= Number(event.target.firstElementChild.dataset.index)+1
     // bigImg.dataset.index=index+1
-    // imgBigRef.dataset +=event.target.dataset.index 
-    console.log(event.target.firstElementChild.dataset.index)
+    imgBigRef.dataset.index +=1
+    // console.log(event.target.firstElementChild.dataset.index)
     
-  }
-      
-  
-}
+  }}
 
 function closeModal() {
   modalRef.classList.remove("is-open");
