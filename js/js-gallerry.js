@@ -5,7 +5,7 @@ const modalRef = document.querySelector(".lightbox");
 const imgBigRef = document.querySelector(".lightbox__image");
 const btnCloseRef = document.querySelector('[data-action="close-lightbox"]');
 const backdropRef = document.querySelector(".lightbox__overlay");
-const galArr = gallery.map(({ preview, original, description }) => {
+const galArr = gallery.map(({ preview, original, description, i }) => {
   return `<li class="gallery__item">
 <a
   class="gallery__link"
@@ -16,6 +16,7 @@ const galArr = gallery.map(({ preview, original, description }) => {
     src='${preview}'
     data-source='${original}'
     alt='${description}'
+    data-index='${i}'
   />
 </a>
 </li>`;
@@ -23,6 +24,7 @@ const galArr = gallery.map(({ preview, original, description }) => {
 
 galleryRef.insertAdjacentHTML("afterbegin", galArr.join(""));
 galleryRef.addEventListener("click", onClickGall);
+btnCloseRef.addEventListener("click", closeModal);
 
 function onClickGall(event) {
   event.preventDefault();
@@ -30,31 +32,43 @@ function onClickGall(event) {
     return;
   }
   const bigImg = event.target.dataset.source;
+  const index = event.target.dataset.index
   modalRef.classList.add("is-open");
   imgBigRef.src = bigImg;
-  console.log(event.target);
-  window.addEventListener("keydown", pressEscape) 
+  imgBigRef.dataset.index = index
+  // console.log(event.target)
+
+  window.addEventListener("keydown", pressEscape);
+  window.addEventListener("keydown", changeImg);
+}
+
+function changeImg(event) {
+  
+  if (event.code ==="ArrowRight"){
+    event.target.firstElementChild.dataset.index= Number(event.target.firstElementChild.dataset.index)+1
+    // bigImg.dataset.index=index+1
+    // imgBigRef.dataset +=event.target.dataset.index 
+    console.log(event.target.firstElementChild.dataset.index)
+    
+  }
       
-};
-btnCloseRef.addEventListener("click", closeModal);
+  
+}
 
 function closeModal() {
   modalRef.classList.remove("is-open");
   imgBigRef.src = "";
-  window.removeEventListener("keydown", pressEscape)
-
+  window.removeEventListener("keydown", pressEscape);
 }
 
 backdropRef.addEventListener("click", (event) => {
   if (event.target === event.currentTarget) {
     closeModal();
   }
-  
 });
 
-function pressEscape(event){
-      if (event.code === "Escape") {
-      closeModal();
-    }
-    
+function pressEscape(event) {
+  if (event.code === "Escape") {
+    closeModal();
+  }
 }
