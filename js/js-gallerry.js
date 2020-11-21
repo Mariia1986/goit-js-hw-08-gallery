@@ -64,8 +64,8 @@ function pressKey(event) {
     getBigIMG(imgBigRef.dataset.index, -1);
   }
 }
-function getBigIMG(Ind, add) {
-  let activeIndex = Number(Ind) + add;
+function getBigIMG(Ind, step) {
+  let activeIndex = Number(Ind) + step;
   if (activeIndex === -1) {
     activeIndex = gallery.length - 1;
   }
